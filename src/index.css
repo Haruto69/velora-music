@@ -23,6 +23,9 @@
 
 @layer base {
   :root {
+    --player-desktop: 96px;
+    --player-mobile: 136px;
+    
     --background: hsl(240 10% 4%);
     --foreground: hsl(0 0% 95%);
     --card: hsl(240 10% 6%);
@@ -58,5 +61,11 @@
   body {
     @apply bg-background text-foreground min-h-screen antialiased;
     background-image: radial-gradient(ellipse at top, var(--color-background), black);
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

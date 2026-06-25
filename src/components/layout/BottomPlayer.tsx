@@ -2,7 +2,7 @@ import { Play, SkipBack, SkipForward, Volume2 } from 'lucide-react';
 
 export function BottomPlayer() {
   return (
-    <div className="fixed bottom-16 md:bottom-0 left-0 right-0 h-20 md:h-24 bg-card/80 backdrop-blur-xl border-t border-border flex items-center px-4 md:px-8 justify-between z-50">
+    <div className="fixed bottom-16 md:bottom-0 left-0 right-0 h-[72px] md:h-24 bg-card/80 backdrop-blur-xl border-t border-border flex items-center px-4 md:px-8 justify-between z-50">
       {/* Track Info */}
       <div className="flex items-center gap-4 w-1/3 min-w-[150px]">
         <div className="w-12 h-12 md:w-14 md:h-14 bg-white/10 rounded-md overflow-hidden flex-shrink-0">

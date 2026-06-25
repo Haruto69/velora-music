@@ -99,7 +99,7 @@ export default function Playlist() {
           <div className="w-10 text-right">Time</div>
         </div>
         
-        <div className="space-y-1">
+        <div className="space-y-1 pb-6">
           {playlistSongs.map((song, index) => (
             <SongRow key={song.id} song={song} index={index + 1} />
           ))}

@@ -6,20 +6,25 @@ import { MobileNav } from './MobileNav';
 
 export function AppLayout() {
   return (
-    <div className="flex h-screen w-full max-w-full overflow-hidden bg-background relative">
+    <div className="h-screen w-full max-w-full overflow-hidden bg-background relative flex">
       {/* Dynamic Background Elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/20 blur-[120px] pointer-events-none"></div>
+      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[120px] pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/20 blur-[120px] pointer-events-none z-0"></div>
 
-      <Sidebar />
-      
-      <main className="flex-1 flex flex-col relative min-w-0 overflow-hidden">
-        <TopBar />
-        
-        <div className="flex-1 overflow-y-auto overflow-x-hidden min-w-0 pb-24 md:pb-28 scrollbar-hide">
-          <Outlet />
+      {/* Sidebar container */}
+      <div className="hidden md:block w-64 flex-shrink-0 relative z-20 border-r border-border bg-card/50 backdrop-blur-md">
+        <div className="h-[calc(100vh-var(--player-desktop))] w-64 overflow-y-auto scrollbar-hide">
+          <Sidebar />
         </div>
-      </main>
+      </div>
+      
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 relative z-10 h-[calc(100vh-var(--player-mobile))] md:h-[calc(100vh-var(--player-desktop))] overflow-y-auto overflow-x-hidden safe-bottom">
+        <TopBar />
+        <main className="flex-1 min-w-0">
+          <Outlet />
+        </main>
+      </div>
 
       <BottomPlayer />
       <MobileNav />

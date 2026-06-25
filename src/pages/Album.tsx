@@ -96,7 +96,7 @@ export default function Album() {
           <div className="w-10 text-right">Time</div>
         </div>
         
-        <div className="space-y-1">
+        <div className="space-y-1 pb-6">
           {albumSongs.map((song, index) => (
             <SongRow key={song.id} song={song} index={index + 1} />
           ))}

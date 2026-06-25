@@ -3,7 +3,7 @@ import { Home, Library, Search, Heart, Settings } from 'lucide-react';
 
 export function Sidebar() {
   return (
-    <div className="hidden md:flex flex-col w-64 bg-card/50 backdrop-blur-md border-r border-border p-6 h-full">
+    <div className="hidden md:flex flex-col w-64 p-6 h-full">
       <div className="flex items-center gap-2 mb-10">
         <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
           <span className="font-bold text-primary-foreground text-sm">V</span>
