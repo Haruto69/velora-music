@@ -1,4 +1,4 @@
-import { Play, Pause, Heart, Plus } from 'lucide-react';
+import { Play, Heart, Plus } from 'lucide-react';
 import { Song } from '../../types/music';
 import { formatTime } from '../../utils/formatTime';
 import { usePlayerStore } from '../../store/playerStore';
@@ -36,12 +36,22 @@ export function SongRow({ song, index, contextList, isLiked, onToggleLike }: Son
   return (
     <div 
       onClick={handlePlayClick}
-      className={`flex items-center gap-4 py-2 px-4 rounded-md hover:bg-white/5 group transition-colors cursor-pointer ${isActive ? 'bg-white/5' : ''}`}
+      className={`flex items-center gap-4 py-2 px-4 rounded-xl group transition-all duration-300 cursor-pointer border overflow-hidden relative ${isActive ? 'bg-primary/10 border-primary/20 shadow-[0_4px_20px_rgba(139,92,246,0.1)]' : 'border-transparent hover:bg-white/5 hover:border-white/5 hover:shadow-md'}`}
     >
-      <div className="w-8 flex justify-center text-muted-foreground group-hover:text-foreground">
+      <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+      <div className="w-8 flex justify-center text-muted-foreground group-hover:text-foreground relative z-10">
         {isActive ? (
-          <button className="text-primary hover:scale-110 transition-transform">
-            {isPlaying ? <Pause size={16} className="fill-current" /> : <Play size={16} className="fill-current" />}
+          <button className="text-primary hover:scale-110 transition-transform flex items-center justify-center">
+            {isPlaying ? (
+              <div className="flex items-end justify-center gap-[2px] h-4 w-4">
+                <div className="w-[3px] bg-primary animate-[bounce_1s_infinite] h-full rounded-t-sm"></div>
+                <div className="w-[3px] bg-primary animate-[bounce_1s_infinite_0.2s] h-2/3 rounded-t-sm"></div>
+                <div className="w-[3px] bg-primary animate-[bounce_1s_infinite_0.4s] h-full rounded-t-sm"></div>
+              </div>
+            ) : (
+              <Play size={16} className="fill-current" />
+            )}
           </button>
         ) : (
           <>
@@ -53,41 +63,32 @@ export function SongRow({ song, index, contextList, isLiked, onToggleLike }: Son
         )}
       </div>
 
-      <div className="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-white/10 shadow-sm relative">
-        <img src={song.coverUrl} alt={song.title} className="w-full h-full object-cover" />
-        {isActive && isPlaying && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="w-4 h-4 flex items-end justify-center gap-[2px]">
-              <div className="w-1 bg-primary animate-[bounce_1s_infinite] h-full"></div>
-              <div className="w-1 bg-primary animate-[bounce_1s_infinite_0.2s] h-2/3"></div>
-              <div className="w-1 bg-primary animate-[bounce_1s_infinite_0.4s] h-full"></div>
-            </div>
-          </div>
-        )}
+      <div className="w-10 h-10 rounded overflow-hidden flex-shrink-0 shadow-sm relative z-10 group-hover:shadow-md transition-shadow">
+        <img src={song.coverUrl} alt={song.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
       </div>
 
-      <div className="flex-1 min-w-0">
-        <h4 className={`font-medium truncate text-sm ${isActive ? 'text-primary' : 'text-foreground'}`}>
+      <div className="flex-1 min-w-0 relative z-10">
+        <h4 className={`font-medium truncate text-sm transition-colors ${isActive ? 'text-primary' : 'text-foreground group-hover:text-primary/90'}`}>
           {song.title}
         </h4>
         <p className="text-muted-foreground text-xs truncate">{song.artistName}</p>
       </div>
 
-      <div className="hidden md:block flex-1 min-w-0 text-muted-foreground text-sm truncate">
+      <div className="hidden md:block flex-1 min-w-0 text-muted-foreground text-sm truncate relative z-10">
         {song.albumTitle || 'Single'}
       </div>
 
-      <div className="flex items-center gap-4 text-muted-foreground">
+      <div className="flex items-center gap-4 text-muted-foreground relative z-10">
         <button 
           onClick={(e) => { e.stopPropagation(); onToggleLike?.(); }}
-          className={`hover:text-foreground transition-colors ${isLiked ? 'text-primary' : ''}`}
+          className={`hover:text-foreground transition-colors hover:scale-110 ${isLiked ? 'text-primary' : ''}`}
         >
           <Heart size={16} className={isLiked ? 'fill-current' : ''} />
         </button>
         <span className={`text-sm w-10 text-right ${isActive ? 'text-primary' : ''}`}>{formatTime(song.duration)}</span>
         <button 
           onClick={handleAddToQueue}
-          className="hover:text-foreground transition-colors opacity-0 group-hover:opacity-100" 
+          className="hover:text-white transition-all opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-white/10 p-1.5 rounded-full" 
           title="Add to queue"
         >
           <Plus size={18} />

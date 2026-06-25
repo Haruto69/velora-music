@@ -35,8 +35,8 @@ export function QueueDrawer() {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 w-full md:w-80 h-[calc(100vh-var(--player-mobile))] md:h-[calc(100vh-var(--player-desktop))] bg-background/95 backdrop-blur-3xl border-l border-white/5 z-[45] flex flex-col shadow-2xl"
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed top-0 right-0 w-full md:w-80 h-[calc(100vh-var(--player-mobile))] md:h-[calc(100vh-var(--player-desktop))] bg-black/40 backdrop-blur-3xl border-l border-white/5 z-[45] flex flex-col shadow-2xl"
           >
             <div className="p-5 border-b border-white/5 flex items-center justify-between">
               <h2 className="text-xl font-bold">Play Queue</h2>

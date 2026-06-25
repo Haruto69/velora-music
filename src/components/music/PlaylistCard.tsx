@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Play } from 'lucide-react';
 import { Playlist } from '../../types/music';
+import { AlbumGlow } from '../animations/AlbumGlow';
 
 interface PlaylistCardProps {
   playlist: Playlist;
@@ -10,25 +10,24 @@ export function PlaylistCard({ playlist }: PlaylistCardProps) {
   return (
     <Link 
       to={`/playlist/${playlist.id}`}
-      className="min-w-[160px] md:min-w-[200px] bg-card p-4 rounded-xl hover:bg-white/5 transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] block"
+      className="min-w-[160px] md:min-w-[200px] p-4 rounded-2xl transition-all duration-500 group hover:-translate-y-2 block relative border border-white/5 bg-white/5 backdrop-blur-md overflow-hidden hover:bg-white/10 hover:border-white/10 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
     >
-      <div className="aspect-square rounded-md overflow-hidden mb-4 relative shadow-lg">
-        <img 
-          src={playlist.coverUrl} 
-          alt={playlist.title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-        />
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-2">
-          <button 
-            className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform shadow-lg translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100"
-            onClick={(e) => { e.preventDefault(); /* Phase 2: play playlist */ }}
-          >
-            <Play size={20} className="ml-1" />
-          </button>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+      <AlbumGlow imageUrl={playlist.coverUrl} className="mb-4">
+        <div className="aspect-square rounded-xl overflow-hidden relative shadow-lg">
+          <img 
+            src={playlist.coverUrl} 
+            alt={playlist.title} 
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+          />
+          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
+      </AlbumGlow>
+      <div className="relative z-10">
+        <h3 className="font-semibold truncate text-foreground text-base mb-1 transition-colors group-hover:text-primary/90">{playlist.title}</h3>
+        <p className="text-sm text-muted-foreground truncate">{playlist.description || 'Playlist'}</p>
       </div>
-      <h3 className="font-semibold truncate text-foreground text-base mb-1">{playlist.title}</h3>
-      <p className="text-sm text-muted-foreground line-clamp-2 leading-snug">{playlist.description}</p>
     </Link>
   );
 }

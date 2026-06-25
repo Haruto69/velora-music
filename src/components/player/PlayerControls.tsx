@@ -3,6 +3,7 @@ import { usePlayerStore } from '../../store/playerStore';
 import { PlaybackButton } from './PlaybackButton';
 import { ShuffleButton } from './ShuffleButton';
 import { RepeatButton } from './RepeatButton';
+import { MagneticButton } from '../animations/MagneticButton';
 
 export function PlayerControls() {
   const nextTrack = usePlayerStore(state => state.nextTrack);
@@ -26,7 +27,9 @@ export function PlayerControls() {
         <SkipBack size={24} className="fill-current" />
       </button>
       
-      <PlaybackButton size="md" />
+      <MagneticButton strength={8}>
+        <PlaybackButton size="md" />
+      </MagneticButton>
       
       <button 
         onClick={nextTrack}

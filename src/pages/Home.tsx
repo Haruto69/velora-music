@@ -10,6 +10,7 @@ import { AlbumCard } from '../components/music/AlbumCard';
 import { ArtistCard } from '../components/music/ArtistCard';
 import { PlaylistCard } from '../components/music/PlaylistCard';
 import { usePlayerStore } from '../store/playerStore';
+import { MagneticButton } from '../components/animations/MagneticButton';
 
 export default function Home() {
   const featuredPlaylist = mockPlaylists[0];
@@ -38,15 +39,17 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
         <div className="absolute bottom-0 left-0 p-8 flex flex-col items-start max-w-2xl">
           <span className="text-primary font-semibold tracking-wider text-sm mb-2 uppercase">Featured Playlist</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{featuredPlaylist.title}</h1>
-          <p className="text-white/80 mb-6 line-clamp-2">{featuredPlaylist.description}</p>
-          <button 
-            onClick={handlePlayFeatured}
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.5)]"
-          >
-            <Play size={20} className="fill-current" />
-            Play Now
-          </button>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-xl">{featuredPlaylist.title}</h1>
+          <p className="text-white/80 mb-6 line-clamp-2 drop-shadow-md">{featuredPlaylist.description}</p>
+          <MagneticButton strength={20}>
+            <button 
+              onClick={handlePlayFeatured}
+              className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-all shadow-[0_0_20px_rgba(139,92,246,0.6)]"
+            >
+              <Play size={20} className="fill-current" />
+              Play Now
+            </button>
+          </MagneticButton>
         </div>
       </section>
 

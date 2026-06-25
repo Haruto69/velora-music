@@ -8,7 +8,10 @@ export function BottomPlayer() {
   const currentTrack = usePlayerStore(state => state.currentTrack);
 
   return (
-    <div className="fixed bottom-16 md:bottom-0 left-0 right-0 h-[72px] md:h-24 bg-card/80 backdrop-blur-xl border-t border-border grid grid-cols-[48px_1fr_48px] md:flex md:items-center px-4 md:px-8 md:justify-between z-50 gap-2 md:gap-0">
+    <div className="fixed bottom-16 md:bottom-0 left-0 right-0 h-[72px] md:h-24 bg-background/40 backdrop-blur-2xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] grid grid-cols-[48px_1fr_48px] md:flex md:items-center px-4 md:px-8 md:justify-between z-50 gap-2 md:gap-0 transition-all duration-300">
+      
+      {/* Subtle top inner glow */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
       
       {/* Track Info */}
       <div className="flex items-center gap-4 md:w-1/3 md:min-w-[150px] self-center">

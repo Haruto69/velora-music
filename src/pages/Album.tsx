@@ -5,6 +5,8 @@ import { mockAlbums } from '../data/albums';
 import { mockSongs } from '../data/songs';
 import { SongRow } from '../components/music/SongRow';
 import { usePlayerStore } from '../store/playerStore';
+import { AlbumGlow } from '../components/animations/AlbumGlow';
+import { MagneticButton } from '../components/animations/MagneticButton';
 
 export default function Album() {
   const { id } = useParams();
@@ -56,15 +58,18 @@ export default function Album() {
           </div>
 
           <div className="flex flex-col md:flex-row items-center md:items-end gap-6 w-full">
-            <div className="w-full max-w-[12rem] md:max-w-[15rem] aspect-square shadow-2xl flex-shrink-0 group">
-              <img src={album.coverUrl} alt={album.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-lg" />
-            </div>
+            <AlbumGlow imageUrl={album.coverUrl} className="w-full max-w-[12rem] md:max-w-[15rem] flex-shrink-0 group">
+              <div className="aspect-square shadow-2xl rounded-lg overflow-hidden relative">
+                <img src={album.coverUrl} alt={album.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              </div>
+            </AlbumGlow>
           
           <div className="flex flex-col items-center md:items-start text-center md:text-left mt-4 md:mt-0">
-            <span className="uppercase text-xs font-bold tracking-wider mb-2">Album</span>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">{album.title}</h1>
+            <span className="uppercase text-xs font-bold tracking-wider mb-2 text-primary">Album</span>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">{album.title}</h1>
             <div className="flex items-center gap-2 text-sm text-white/80 font-medium">
-              <span className="text-white hover:underline cursor-pointer">{album.artistName}</span>
+              <span className="text-white hover:text-primary transition-colors cursor-pointer">{album.artistName}</span>
               <span>•</span>
               <span>{album.releaseYear}</span>
               <span>•</span>
@@ -77,17 +82,19 @@ export default function Album() {
 
       {/* Actions */}
       <div className="px-6 md:px-10 py-6 flex items-center gap-6">
-        <button 
-          onClick={() => {
-            if (albumSongs.length > 0) {
-              usePlayerStore.getState().setTrackList(albumSongs, 0);
-            }
-          }}
-          className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.4)]"
-        >
-          <Play size={28} className="ml-1 fill-current" />
-        </button>
-        <button className="text-muted-foreground hover:text-white transition-colors">
+        <MagneticButton strength={15}>
+          <button 
+            onClick={() => {
+              if (albumSongs.length > 0) {
+                usePlayerStore.getState().setTrackList(albumSongs, 0);
+              }
+            }}
+            className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform shadow-[0_0_30px_rgba(139,92,246,0.5)]"
+          >
+            <Play size={32} className="ml-1 fill-current" />
+          </button>
+        </MagneticButton>
+        <button className="text-muted-foreground hover:text-white transition-colors hover:scale-110">
           <Heart size={32} />
         </button>
         <button className="text-muted-foreground hover:text-white transition-colors">
