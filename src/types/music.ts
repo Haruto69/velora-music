@@ -13,6 +13,7 @@ export interface Song {
   plays?: number;
   releaseYear?: number;
   isExplicit?: boolean;
+  lyrics?: string[];
 }
 
 export interface Album {

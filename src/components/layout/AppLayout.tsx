@@ -3,6 +3,7 @@ import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
 import { BottomPlayer } from '../player/BottomPlayer';
 import { QueueDrawer } from '../player/QueueDrawer';
+import { LyricsDrawer } from '../player/LyricsDrawer';
 import { MobileNav } from './MobileNav';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { AnimatedBackground } from '../animations/AnimatedBackground';
@@ -32,6 +33,7 @@ export function AppLayout() {
       </div>
 
       <QueueDrawer />
+      <LyricsDrawer />
 
       <BottomPlayer />
       <MobileNav />

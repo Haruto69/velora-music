@@ -15,7 +15,17 @@ export const mockSongs: Song[] = [
     mood: "Energetic",
     plays: 1205000,
     releaseYear: 2024,
-    isExplicit: false
+    isExplicit: false,
+    lyrics: [
+      "Cruising through the city lights",
+      "Neon dreams fill up the nights",
+      "Everything is fading fast",
+      "But these digital memories will always last",
+      "Oh, neon dreams, electric streams",
+      "Nothing is exactly as it seems",
+      "Drive until the morning breaks",
+      "Leaving all our past mistakes"
+    ]
   },
   {
     id: "song-2",
@@ -31,7 +41,17 @@ export const mockSongs: Song[] = [
     mood: "Chill",
     plays: 850000,
     releaseYear: 2023,
-    isExplicit: false
+    isExplicit: false,
+    lyrics: [
+      "You were just a hologram",
+      "But I felt something real",
+      "In the wires and the code",
+      "I began to feel",
+      "Cybernetic love, floating above",
+      "Pixelated skies and digital doves",
+      "Connection lost, connection found",
+      "In this binary world we are bound"
+    ]
   },
   {
     id: "song-3",
@@ -47,7 +67,17 @@ export const mockSongs: Song[] = [
     mood: "Melancholic",
     plays: 2100000,
     releaseYear: 2024,
-    isExplicit: false
+    isExplicit: false,
+    lyrics: [
+      "Raindrops on the glass",
+      "Watching the cars go past",
+      "Shinjuku nights in the blur",
+      "Without you I am unsure",
+      "Tokyo rain washing the pain",
+      "Colors bleeding down the drain",
+      "I'm walking these streets alone",
+      "Waiting for a call on my phone"
+    ]
   },
   {
     id: "song-4",
@@ -63,7 +93,17 @@ export const mockSongs: Song[] = [
     mood: "Driving",
     plays: 540000,
     releaseYear: 2022,
-    isExplicit: false
+    isExplicit: false,
+    lyrics: [
+      "Warp speed through the stars",
+      "Leaving behind old scars",
+      "Asteroids passing by",
+      "Under a purple sky",
+      "Galactic highway, we are free",
+      "Just you and me, eternally",
+      "No limits, no looking back",
+      "Riding on this cosmic track"
+    ]
   },
   {
     id: "song-5",
@@ -79,6 +119,16 @@ export const mockSongs: Song[] = [
     mood: "Chill",
     plays: 1500000,
     releaseYear: 2024,
-    isExplicit: true
+    isExplicit: true,
+    lyrics: [
+      "Engine hums, the radio plays",
+      "Lost in the midnight haze",
+      "Headlights cut the dark",
+      "Looking for that missing spark",
+      "Night drive, nowhere to be",
+      "Just the open road and me",
+      "Windows down, the cool breeze",
+      "Putting my mind at ease"
+    ]
   }
 ];

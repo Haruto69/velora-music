@@ -5,7 +5,11 @@ import { ShuffleButton } from './ShuffleButton';
 import { RepeatButton } from './RepeatButton';
 import { MagneticButton } from '../animations/MagneticButton';
 
-export function PlayerControls() {
+interface PlayerControlsProps {
+  showExtraControlsOnMobile?: boolean;
+}
+
+export function PlayerControls({ showExtraControlsOnMobile = false }: PlayerControlsProps) {
   const nextTrack = usePlayerStore(state => state.nextTrack);
   const previousTrack = usePlayerStore(state => state.previousTrack);
   const queue = usePlayerStore(state => state.queue);
@@ -17,7 +21,9 @@ export function PlayerControls() {
 
   return (
     <div className="flex items-center gap-4 md:gap-6">
-      <ShuffleButton />
+      <div className={showExtraControlsOnMobile ? "block" : "hidden md:block"}>
+        <ShuffleButton />
+      </div>
       
       <button 
         onClick={previousTrack}
@@ -39,7 +45,9 @@ export function PlayerControls() {
         <SkipForward size={24} className="fill-current" />
       </button>
 
-      <RepeatButton />
+      <div className={showExtraControlsOnMobile ? "block" : "hidden md:block"}>
+        <RepeatButton />
+      </div>
     </div>
   );
 }

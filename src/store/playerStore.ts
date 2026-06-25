@@ -18,6 +18,7 @@ interface PlayerState {
   isShuffleEnabled: boolean;
   repeatMode: "off" | "one" | "all";
   isQueueDrawerOpen: boolean;
+  isLyricsDrawerOpen: boolean;
 
   // Actions
   setTrackList: (tracks: Song[], startIndex?: number) => void;
@@ -40,6 +41,7 @@ interface PlayerState {
   toggleShuffle: () => void;
   cycleRepeatMode: () => void;
   toggleQueueDrawer: () => void;
+  toggleLyricsDrawer: () => void;
   playFromQueue: (index: number) => void;
 }
 
@@ -69,6 +71,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   isShuffleEnabled: false,
   repeatMode: "off",
   isQueueDrawerOpen: false,
+  isLyricsDrawerOpen: false,
 
   setTrackList: (tracks, startIndex = 0) => {
     if (tracks.length === 0) return;
@@ -266,6 +269,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   toggleQueueDrawer: () => set((state) => ({ isQueueDrawerOpen: !state.isQueueDrawerOpen })),
+  toggleLyricsDrawer: () => set((state) => ({ isLyricsDrawerOpen: !state.isLyricsDrawerOpen })),
   
   playFromQueue: (index) => {
     set((state) => ({
