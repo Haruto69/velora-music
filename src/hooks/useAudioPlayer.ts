@@ -11,7 +11,6 @@ export function useAudioPlayer() {
   
   const setCurrentTime = usePlayerStore(state => state.setCurrentTime);
   const setDuration = usePlayerStore(state => state.setDuration);
-  const nextTrack = usePlayerStore(state => state.nextTrack);
   const pause = usePlayerStore(state => state.pause);
 
   // Initialize audio element
@@ -23,7 +22,11 @@ export function useAudioPlayer() {
 
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
     const handleLoadedMetadata = () => setDuration(audio.duration);
-    const handleEnded = () => nextTrack();
+    
+    // Define handleEnded inside an effect or use a ref for latest values if needed
+    // Actually, since repeatMode and nextTrack are from the store, we can access them fresh via getState or just re-bind
+    // But since repeatMode changes, we should add it to deps or use the store directly
+    
     const handleError = (e: Event) => {
       console.warn("Audio playback error:", e);
       pause();
@@ -31,16 +34,33 @@ export function useAudioPlayer() {
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('ended', handleEnded);
     audio.addEventListener('error', handleError);
 
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('error', handleError);
     };
-  }, [setCurrentTime, setDuration, nextTrack, pause]);
+  }, [setCurrentTime, setDuration, pause]);
+
+  // Handle ended event separately to keep fresh repeatMode
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      const state = usePlayerStore.getState();
+      if (state.repeatMode === "one") {
+        audio.currentTime = 0;
+        audio.play().catch(() => state.pause());
+      } else {
+        state.nextTrack();
+      }
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    return () => audio.removeEventListener('ended', handleEnded);
+  }, []);
 
   // Handle track change
   useEffect(() => {

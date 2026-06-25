@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
 import { BottomPlayer } from '../player/BottomPlayer';
+import { QueueDrawer } from '../player/QueueDrawer';
 import { MobileNav } from './MobileNav';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 
@@ -22,12 +23,14 @@ export function AppLayout() {
       </div>
       
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 relative z-10 h-[calc(100vh-var(--player-mobile))] md:h-[calc(100vh-var(--player-desktop))] overflow-y-auto overflow-x-hidden safe-bottom">
+      <main className="flex-1 overflow-y-auto h-[calc(100vh-var(--player-mobile))] md:h-[calc(100vh-var(--player-desktop))] pb-20 md:pb-8 relative">
         <TopBar />
-        <main className="flex-1 min-w-0">
+        <div className="mx-auto max-w-7xl">
           <Outlet />
-        </main>
-      </div>
+        </div>
+      </main>
+
+      <QueueDrawer />
 
       <BottomPlayer />
       <MobileNav />

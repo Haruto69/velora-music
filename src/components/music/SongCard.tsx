@@ -1,4 +1,4 @@
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, Plus } from 'lucide-react';
 import { Song } from '../../types/music';
 import { usePlayerStore } from '../../store/playerStore';
 
@@ -12,6 +12,7 @@ export function SongCard({ song, contextList }: SongCardProps) {
   const isPlaying = usePlayerStore(state => state.isPlaying);
   const playTrack = usePlayerStore(state => state.playTrack);
   const togglePlay = usePlayerStore(state => state.togglePlay);
+  const addToQueue = usePlayerStore(state => state.addToQueue);
 
   const isActive = currentTrack?.id === song.id;
 
@@ -23,10 +24,15 @@ export function SongCard({ song, contextList }: SongCardProps) {
     }
   };
 
+  const handleAddToQueue = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToQueue(song);
+  };
+
   return (
     <div 
       onClick={handlePlayClick}
-      className={`min-w-[160px] md:min-w-[200px] p-4 rounded-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${isActive ? 'bg-white/10 shadow-[0_8px_30px_rgba(139,92,246,0.15)] ring-1 ring-primary/50' : 'bg-card hover:bg-white/5'}`}
+      className={`min-w-[160px] md:min-w-[200px] p-4 rounded-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] relative ${isActive ? 'bg-white/10 shadow-[0_8px_30px_rgba(139,92,246,0.15)] ring-1 ring-primary/50' : 'bg-card hover:bg-white/5'}`}
     >
       <div className="aspect-square rounded-md overflow-hidden mb-4 relative shadow-lg">
         <img 
@@ -46,6 +52,13 @@ export function SongCard({ song, contextList }: SongCardProps) {
           </button>
         </div>
       </div>
+      <button 
+        onClick={handleAddToQueue}
+        className="absolute top-6 right-6 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black hover:scale-110 shadow-lg z-10"
+        title="Add to queue"
+      >
+        <Plus size={18} />
+      </button>
       <h3 className={`font-semibold truncate text-base mb-1 ${isActive ? 'text-primary' : 'text-foreground'}`}>{song.title}</h3>
       <p className="text-sm text-muted-foreground truncate">{song.artistName}</p>
     </div>

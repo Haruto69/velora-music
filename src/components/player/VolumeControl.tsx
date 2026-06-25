@@ -16,10 +16,10 @@ export function VolumeControl() {
   const volumePercent = currentVolume * 100;
 
   return (
-    <div className="flex items-center justify-end gap-3 w-1/3 hidden md:flex">
+    <div className="flex items-center justify-end gap-3 hidden md:flex">
       <button 
         onClick={toggleMute}
-        className="text-muted-foreground hover:text-white transition-colors"
+        className="text-muted-foreground hover:text-white transition-colors flex items-center justify-center w-10 h-10 md:w-auto md:h-auto shrink-0"
       >
         {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
       </button>

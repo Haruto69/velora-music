@@ -1,4 +1,4 @@
-import { Play, Pause, Heart, MoreHorizontal } from 'lucide-react';
+import { Play, Pause, Heart, Plus } from 'lucide-react';
 import { Song } from '../../types/music';
 import { formatTime } from '../../utils/formatTime';
 import { usePlayerStore } from '../../store/playerStore';
@@ -16,6 +16,7 @@ export function SongRow({ song, index, contextList, isLiked, onToggleLike }: Son
   const isPlaying = usePlayerStore(state => state.isPlaying);
   const playTrack = usePlayerStore(state => state.playTrack);
   const togglePlay = usePlayerStore(state => state.togglePlay);
+  const addToQueue = usePlayerStore(state => state.addToQueue);
 
   const isActive = currentTrack?.id === song.id;
 
@@ -25,6 +26,11 @@ export function SongRow({ song, index, contextList, isLiked, onToggleLike }: Son
     } else {
       playTrack(song, contextList);
     }
+  };
+
+  const handleAddToQueue = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToQueue(song);
   };
 
   return (
@@ -79,8 +85,12 @@ export function SongRow({ song, index, contextList, isLiked, onToggleLike }: Son
           <Heart size={16} className={isLiked ? 'fill-current' : ''} />
         </button>
         <span className={`text-sm w-10 text-right ${isActive ? 'text-primary' : ''}`}>{formatTime(song.duration)}</span>
-        <button className="hover:text-foreground transition-colors opacity-0 group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
-          <MoreHorizontal size={16} />
+        <button 
+          onClick={handleAddToQueue}
+          className="hover:text-foreground transition-colors opacity-0 group-hover:opacity-100" 
+          title="Add to queue"
+        >
+          <Plus size={18} />
         </button>
       </div>
     </div>
