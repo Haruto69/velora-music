@@ -4,10 +4,15 @@ export interface Song {
   artistId: string;
   artistName: string;
   albumId?: string;
-  albumName?: string;
+  albumTitle?: string;
   duration: number; // in seconds
   coverUrl: string;
-  audioUrl?: string; // Phase 2
+  audioUrl?: string; // Phase 2 placeholder
+  genre?: string;
+  mood?: string;
+  plays?: number;
+  releaseYear?: number;
+  isExplicit?: boolean;
 }
 
 export interface Album {
@@ -17,6 +22,7 @@ export interface Album {
   artistName: string;
   releaseYear: number;
   coverUrl: string;
+  genre?: string;
   songIds: string[];
 }
 
@@ -24,17 +30,21 @@ export interface Artist {
   id: string;
   name: string;
   imageUrl: string;
+  genre?: string;
+  monthlyListeners?: number;
   bio?: string;
   albumIds: string[];
 }
 
 export interface Playlist {
   id: string;
-  name: string;
+  title: string;
   description?: string;
   coverUrl: string;
   songIds: string[];
-  createdAt: string;
+  mood?: string;
+  createdBy?: string;
+  createdAt?: string;
 }
 
 export interface Genre {

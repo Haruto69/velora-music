@@ -8,7 +8,7 @@ export const useMediaSession = (currentTrack: Song | null) => {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: currentTrack.title,
         artist: currentTrack.artistName,
-        album: currentTrack.albumName || 'Velora',
+        album: currentTrack.albumTitle || 'Velora',
         artwork: [
           { src: currentTrack.coverUrl, sizes: '512x512', type: 'image/jpeg' }
         ]
