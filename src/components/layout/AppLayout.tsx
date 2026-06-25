@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
-import { BottomPlayer } from './BottomPlayer';
+import { BottomPlayer } from '../player/BottomPlayer';
 import { MobileNav } from './MobileNav';
+import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 
 export function AppLayout() {
+  useAudioPlayer(); // Mounts the persistent audio element
+
   return (
     <div className="h-screen w-full max-w-full overflow-hidden bg-background relative flex">
       {/* Dynamic Background Elements */}

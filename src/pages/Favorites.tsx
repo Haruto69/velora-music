@@ -40,6 +40,7 @@ export default function Favorites() {
                 key={song.id} 
                 song={song} 
                 index={index + 1} 
+                contextList={favoriteSongs}
                 isLiked={true}
                 onToggleLike={() => toggleLikeSong(song.id)}
               />

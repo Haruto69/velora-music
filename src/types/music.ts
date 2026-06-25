@@ -7,7 +7,7 @@ export interface Song {
   albumTitle?: string;
   duration: number; // in seconds
   coverUrl: string;
-  audioUrl?: string; // Phase 2 placeholder
+  audioUrl: string; // Real remote URL for Phase 3
   genre?: string;
   mood?: string;
   plays?: number;

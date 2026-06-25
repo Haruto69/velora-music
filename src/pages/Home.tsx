@@ -9,9 +9,21 @@ import { SongCard } from '../components/music/SongCard';
 import { AlbumCard } from '../components/music/AlbumCard';
 import { ArtistCard } from '../components/music/ArtistCard';
 import { PlaylistCard } from '../components/music/PlaylistCard';
+import { usePlayerStore } from '../store/playerStore';
 
 export default function Home() {
   const featuredPlaylist = mockPlaylists[0];
+  const setTrackList = usePlayerStore(state => state.setTrackList);
+
+  const handlePlayFeatured = () => {
+    const playlistSongs = featuredPlaylist.songIds
+      .map(id => mockSongs.find(s => s.id === id))
+      .filter(Boolean) as typeof mockSongs;
+    
+    if (playlistSongs.length > 0) {
+      setTrackList(playlistSongs, 0);
+    }
+  };
 
   return (
     <motion.div 
@@ -28,7 +40,10 @@ export default function Home() {
           <span className="text-primary font-semibold tracking-wider text-sm mb-2 uppercase">Featured Playlist</span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{featuredPlaylist.title}</h1>
           <p className="text-white/80 mb-6 line-clamp-2">{featuredPlaylist.description}</p>
-          <button className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+          <button 
+            onClick={handlePlayFeatured}
+            className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+          >
             <Play size={20} className="fill-current" />
             Play Now
           </button>
@@ -53,7 +68,7 @@ export default function Home() {
         <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
           {mockSongs.map((song) => (
             <div key={song.id} className="snap-start">
-              <SongCard song={song} />
+              <SongCard song={song} contextList={mockSongs} />
             </div>
           ))}
         </div>

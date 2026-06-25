@@ -4,6 +4,7 @@ import { Play, Heart, MoreHorizontal, ArrowLeft } from 'lucide-react';
 import { mockAlbums } from '../data/albums';
 import { mockSongs } from '../data/songs';
 import { SongRow } from '../components/music/SongRow';
+import { usePlayerStore } from '../store/playerStore';
 
 export default function Album() {
   const { id } = useParams();
@@ -76,7 +77,14 @@ export default function Album() {
 
       {/* Actions */}
       <div className="px-6 md:px-10 py-6 flex items-center gap-6">
-        <button className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.4)]">
+        <button 
+          onClick={() => {
+            if (albumSongs.length > 0) {
+              usePlayerStore.getState().setTrackList(albumSongs, 0);
+            }
+          }}
+          className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+        >
           <Play size={28} className="ml-1 fill-current" />
         </button>
         <button className="text-muted-foreground hover:text-white transition-colors">
@@ -98,7 +106,7 @@ export default function Album() {
         
         <div className="space-y-1 pb-6">
           {albumSongs.map((song, index) => (
-            <SongRow key={song.id} song={song} index={index + 1} />
+            <SongRow key={song.id} song={song} index={index + 1} contextList={albumSongs} />
           ))}
         </div>
       </div>
