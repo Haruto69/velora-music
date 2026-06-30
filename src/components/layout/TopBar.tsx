@@ -1,15 +1,70 @@
-import { Bell, Search, User } from 'lucide-react';
+import { Bell, Search, User, X } from 'lucide-react';
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
 export function TopBar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const initialQuery = searchParams.get('q') || '';
+  
+  const [localQuery, setLocalQuery] = useState(initialQuery);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Sync with URL when external changes happen
+  useEffect(() => {
+    if (location.pathname === '/search') {
+      const q = searchParams.get('q') || '';
+      if (q !== localQuery) {
+        setLocalQuery(q);
+      }
+    } else {
+      setLocalQuery('');
+    }
+  }, [location.pathname, searchParams]);
+
+  const handleSearchChange = (val: string) => {
+    setLocalQuery(val);
+    if (location.pathname !== '/search') {
+      if (val.trim()) {
+        navigate(`/search?q=${encodeURIComponent(val)}`);
+      }
+    } else {
+      if (val.trim()) {
+        navigate(`/search?q=${encodeURIComponent(val)}`, { replace: true });
+      } else {
+        navigate(`/search`, { replace: true });
+      }
+    }
+  };
+
+  const handleClear = () => {
+    handleSearchChange('');
+    inputRef.current?.focus();
+  };
+
   return (
     <header className="h-20 shrink-0 flex items-center justify-between px-6 md:px-10 bg-background/30 z-10 backdrop-blur-xl border-b border-white/5 shadow-sm transition-all duration-300">
-      <div className="flex-1 max-w-xl hidden md:flex items-center bg-black/40 rounded-full px-4 py-2 border border-white/10 focus-within:border-primary/50 transition-colors shadow-inner">
-        <Search size={18} className="text-muted-foreground mr-3" />
+      <div className="flex-1 max-w-xl hidden md:flex items-center bg-black/40 rounded-full border border-white/10 focus-within:border-primary/50 transition-colors shadow-inner relative">
+        <div className="pl-4 pr-3 flex items-center pointer-events-none">
+          <Search size={18} className="text-muted-foreground" />
+        </div>
         <input 
+          ref={inputRef}
           type="text" 
+          value={localQuery}
+          onChange={(e) => handleSearchChange(e.target.value)}
           placeholder="Search for songs, artists, or albums..." 
-          className="bg-transparent border-none outline-none text-sm w-full text-foreground placeholder:text-muted-foreground"
+          className="bg-transparent border-none outline-none text-sm w-full py-2.5 text-foreground placeholder:text-muted-foreground"
         />
+        {localQuery && (
+          <button 
+            onClick={handleClear}
+            className="pr-4 pl-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
       
       {/* Mobile Title Placeholder */}

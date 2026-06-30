@@ -36,5 +36,41 @@ export const mockArtists: Artist[] = [
     genre: "Pop",
     monthlyListeners: 3100000,
     albumIds: ["album-4"]
+  },
+  {
+    id: "artist-5",
+    name: "Velvet Haze",
+    imageUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80&w=500&h=500",
+    bio: "Lo-fi and chill hop beats.",
+    genre: "Lo-fi",
+    monthlyListeners: 1500000,
+    albumIds: ["album-5"]
+  },
+  {
+    id: "artist-6",
+    name: "Chromatic",
+    imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=500&h=500",
+    bio: "High energy cyberpunk sounds.",
+    genre: "Cyberpunk",
+    monthlyListeners: 900000,
+    albumIds: ["album-6"]
+  },
+  {
+    id: "artist-7",
+    name: "Solar Wind",
+    imageUrl: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&q=80&w=500&h=500",
+    bio: "Ambient exploration.",
+    genre: "Ambient",
+    monthlyListeners: 400000,
+    albumIds: ["album-7"]
+  },
+  {
+    id: "artist-8",
+    name: "Ivory Keys",
+    imageUrl: "https://images.unsplash.com/photo-1507400492013-162706c8c05e?auto=format&fit=crop&q=80&w=500&h=500",
+    bio: "Indie melancholia.",
+    genre: "Indie",
+    monthlyListeners: 600000,
+    albumIds: ["album-8"]
   }
 ];

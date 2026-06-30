@@ -40,5 +40,45 @@ export const mockAlbums: Album[] = [
     coverUrl: "https://images.unsplash.com/photo-1516280440502-861f5bc91244?auto=format&fit=crop&q=80&w=500&h=500",
     genre: "Pop",
     songIds: ["song-5"]
+  },
+  {
+    id: "album-5",
+    title: "Lucid",
+    artistId: "artist-5",
+    artistName: "Velvet Haze",
+    releaseYear: 2024,
+    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80&w=500&h=500",
+    genre: "Lo-fi",
+    songIds: ["song-6", "song-9"]
+  },
+  {
+    id: "album-6",
+    title: "Binary Sunset",
+    artistId: "artist-6",
+    artistName: "Chromatic",
+    releaseYear: 2023,
+    coverUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=500&h=500",
+    genre: "Cyberpunk",
+    songIds: ["song-7"]
+  },
+  {
+    id: "album-7",
+    title: "Golden Hour",
+    artistId: "artist-7",
+    artistName: "Solar Wind",
+    releaseYear: 2023,
+    coverUrl: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&q=80&w=500&h=500",
+    genre: "Ambient",
+    songIds: ["song-8"]
+  },
+  {
+    id: "album-8",
+    title: "Nocturne",
+    artistId: "artist-8",
+    artistName: "Ivory Keys",
+    releaseYear: 2024,
+    coverUrl: "https://images.unsplash.com/photo-1507400492013-162706c8c05e?auto=format&fit=crop&q=80&w=500&h=500",
+    genre: "Indie",
+    songIds: ["song-12"]
   }
 ];
