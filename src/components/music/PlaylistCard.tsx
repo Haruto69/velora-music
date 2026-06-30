@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Playlist } from '../../types/music';
 import { AlbumGlow } from '../animations/AlbumGlow';
+import { SaveButton } from '../library/SaveButton';
 
 interface PlaylistCardProps {
   playlist: Playlist;
@@ -24,6 +25,13 @@ export function PlaylistCard({ playlist }: PlaylistCardProps) {
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
       </AlbumGlow>
+
+      <SaveButton 
+        itemId={playlist.id} 
+        type="playlist" 
+        className="absolute top-6 right-6 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 shadow-lg z-10" 
+      />
+
       <div className="relative z-10">
         <h3 className="font-semibold truncate text-foreground text-base mb-1 transition-colors group-hover:text-primary/90">{playlist.title}</h3>
         <p className="text-sm text-muted-foreground truncate">{playlist.description || 'Playlist'}</p>

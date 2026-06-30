@@ -10,11 +10,13 @@ import { AlbumCard } from '../components/music/AlbumCard';
 import { ArtistCard } from '../components/music/ArtistCard';
 import { PlaylistCard } from '../components/music/PlaylistCard';
 import { usePlayerStore } from '../store/playerStore';
+import { useLibraryStore } from '../store/libraryStore';
 import { MagneticButton } from '../components/animations/MagneticButton';
 
 export default function Home() {
   const featuredPlaylist = mockPlaylists[0];
   const setTrackList = usePlayerStore(state => state.setTrackList);
+  const libraryState = useLibraryStore();
 
   const handlePlayFeatured = () => {
     const playlistSongs = featuredPlaylist.songIds
@@ -25,6 +27,16 @@ export default function Home() {
       setTrackList(playlistSongs, 0);
     }
   };
+
+  const recentSongs = libraryState.recentlyPlayedIds
+    .map(id => mockSongs.find(s => s.id === id))
+    .filter((s): s is NonNullable<typeof s> => s !== undefined);
+    
+  const heavyRotation = Object.entries(libraryState.playCounts)
+    .sort(([, countA], [, countB]) => countB - countA)
+    .slice(0, 10)
+    .map(([id]) => mockSongs.find(s => s.id === id))
+    .filter((s): s is NonNullable<typeof s> => s !== undefined);
 
   return (
     <motion.div 
@@ -53,6 +65,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Continue Listening / Recently Played */}
+      {recentSongs.length > 0 && (
+        <section>
+          <SectionHeader title="Continue Listening" />
+          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+            {recentSongs.map((song, idx) => (
+              <div key={song.id + '-' + idx} className="snap-start">
+                <SongCard song={song} contextList={recentSongs} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Heavy Rotation */}
+      {heavyRotation.length > 0 && (
+        <section>
+          <SectionHeader title="Your Heavy Rotation" />
+          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+            {heavyRotation.map((song) => (
+              <div key={song.id} className="snap-start">
+                <SongCard song={song} contextList={heavyRotation} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Made For You (Playlists) */}
       <section>
         <SectionHeader title="Made For You" />
@@ -60,18 +100,6 @@ export default function Home() {
           {mockPlaylists.map((playlist) => (
             <div key={playlist.id} className="snap-start">
               <PlaylistCard playlist={playlist} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Recently Played (Songs) */}
-      <section>
-        <SectionHeader title="Recently Played" />
-        <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
-          {mockSongs.map((song) => (
-            <div key={song.id} className="snap-start">
-              <SongCard song={song} contextList={mockSongs} />
             </div>
           ))}
         </div>
@@ -100,6 +128,20 @@ export default function Home() {
           ))}
         </div>
       </section>
+      
+      {/* New Releases (just mockSongs that aren't recent if we want to show generic songs) */}
+      {recentSongs.length === 0 && (
+        <section>
+          <SectionHeader title="New Releases" />
+          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+            {mockSongs.map((song) => (
+              <div key={song.id} className="snap-start">
+                <SongCard song={song} contextList={mockSongs} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
     </motion.div>
   );

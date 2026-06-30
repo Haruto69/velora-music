@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLibraryStore } from '../store/libraryStore';
 import { mockSongs } from '../data/songs';
 import { SongRow } from '../components/music/SongRow';
 
 export default function Favorites() {
   const likedSongIds = useLibraryStore((state) => state.likedSongIds);
-  const toggleLikeSong = useLibraryStore((state) => state.toggleLikeSong);
   
   const favoriteSongs = mockSongs.filter(song => likedSongIds.includes(song.id));
 
@@ -41,8 +41,6 @@ export default function Favorites() {
                 song={song} 
                 index={index + 1} 
                 contextList={favoriteSongs}
-                isLiked={true}
-                onToggleLike={() => toggleLikeSong(song.id)}
               />
             ))}
           </div>
@@ -56,9 +54,9 @@ export default function Favorites() {
           <p className="text-muted-foreground mb-8">
             Save songs by tapping the heart icon. We'll keep them in this special playlist just for you.
           </p>
-          <button className="px-8 py-3 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform">
+          <Link to="/search" className="px-8 py-3 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform">
             Find songs
-          </button>
+          </Link>
         </div>
       )}
     </motion.div>

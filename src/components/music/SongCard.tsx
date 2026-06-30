@@ -3,6 +3,7 @@ import { Song } from '../../types/music';
 import { usePlayerStore } from '../../store/playerStore';
 import { AlbumGlow } from '../animations/AlbumGlow';
 import { MagneticButton } from '../animations/MagneticButton';
+import { LikeButton } from '../library/LikeButton';
 
 interface SongCardProps {
   song: Song;
@@ -62,6 +63,11 @@ export function SongCard({ song, contextList }: SongCardProps) {
         </div>
       </AlbumGlow>
       
+      <LikeButton 
+        songId={song.id} 
+        className="absolute top-6 left-6 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 shadow-lg z-10" 
+      />
+
       <button 
         onClick={handleAddToQueue}
         className="absolute top-6 right-6 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:scale-110 shadow-lg z-10"

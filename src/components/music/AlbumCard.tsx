@@ -3,6 +3,7 @@ import { Play } from 'lucide-react';
 import { Album } from '../../types/music';
 import { AlbumGlow } from '../animations/AlbumGlow';
 import { MagneticButton } from '../animations/MagneticButton';
+import { SaveButton } from '../library/SaveButton';
 
 interface AlbumCardProps {
   album: Album;
@@ -35,6 +36,13 @@ export function AlbumCard({ album }: AlbumCardProps) {
           </div>
         </div>
       </AlbumGlow>
+      
+      <SaveButton 
+        itemId={album.id} 
+        type="album" 
+        className="absolute top-6 right-6 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 shadow-lg z-10" 
+      />
+
       <div className="relative z-10">
         <h3 className="font-semibold truncate text-foreground text-base mb-1 transition-colors group-hover:text-primary/90">{album.title}</h3>
         <p className="text-sm text-muted-foreground truncate">{album.artistName}</p>

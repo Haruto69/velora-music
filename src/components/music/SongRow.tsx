@@ -1,17 +1,16 @@
-import { Play, Heart, Plus } from 'lucide-react';
+import { Play, Plus } from 'lucide-react';
 import { Song } from '../../types/music';
 import { formatTime } from '../../utils/formatTime';
 import { usePlayerStore } from '../../store/playerStore';
+import { LikeButton } from '../library/LikeButton';
 
 interface SongRowProps {
   song: Song;
   index: number;
   contextList?: Song[];
-  isLiked?: boolean;
-  onToggleLike?: () => void;
 }
 
-export function SongRow({ song, index, contextList, isLiked, onToggleLike }: SongRowProps) {
+export function SongRow({ song, index, contextList }: SongRowProps) {
   const currentTrack = usePlayerStore(state => state.currentTrack);
   const isPlaying = usePlayerStore(state => state.isPlaying);
   const playTrack = usePlayerStore(state => state.playTrack);
@@ -79,12 +78,7 @@ export function SongRow({ song, index, contextList, isLiked, onToggleLike }: Son
       </div>
 
       <div className="flex items-center gap-4 text-muted-foreground relative z-10">
-        <button 
-          onClick={(e) => { e.stopPropagation(); onToggleLike?.(); }}
-          className={`hover:text-foreground transition-colors hover:scale-110 ${isLiked ? 'text-primary' : ''}`}
-        >
-          <Heart size={16} className={isLiked ? 'fill-current' : ''} />
-        </button>
+        <LikeButton songId={song.id} />
         <span className={`text-sm w-10 text-right ${isActive ? 'text-primary' : ''}`}>{formatTime(song.duration)}</span>
         <button 
           onClick={handleAddToQueue}

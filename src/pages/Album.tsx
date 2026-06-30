@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Play, Heart, MoreHorizontal, ArrowLeft } from 'lucide-react';
+import { Play, MoreHorizontal, ArrowLeft } from 'lucide-react';
 import { mockAlbums } from '../data/albums';
 import { mockSongs } from '../data/songs';
 import { SongRow } from '../components/music/SongRow';
 import { usePlayerStore } from '../store/playerStore';
 import { AlbumGlow } from '../components/animations/AlbumGlow';
 import { MagneticButton } from '../components/animations/MagneticButton';
+import { SaveButton } from '../components/library/SaveButton';
 
 export default function Album() {
   const { id } = useParams();
@@ -94,9 +95,7 @@ export default function Album() {
             <Play size={32} className="ml-1 fill-current" />
           </button>
         </MagneticButton>
-        <button className="text-muted-foreground hover:text-white transition-colors hover:scale-110">
-          <Heart size={32} />
-        </button>
+        <SaveButton itemId={album.id} type="album" size={32} />
         <button className="text-muted-foreground hover:text-white transition-colors">
           <MoreHorizontal size={32} />
         </button>

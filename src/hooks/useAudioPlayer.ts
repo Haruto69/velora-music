@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { usePlayerStore } from '../store/playerStore';
+import { useLibraryStore } from '../store/libraryStore';
 
 export function useAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -70,6 +71,12 @@ export function useAudioPlayer() {
     if (audio.src !== currentTrack.audioUrl) {
       audio.src = currentTrack.audioUrl;
       audio.load();
+      
+      // Update library stats on new track load
+      const libraryState = useLibraryStore.getState();
+      libraryState.addRecentlyPlayed(currentTrack.id);
+      libraryState.incrementPlayCount(currentTrack.id);
+
       if (isPlaying) {
         audio.play().catch(e => {
           console.warn("Failed to play new track:", e);
