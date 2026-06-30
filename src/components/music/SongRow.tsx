@@ -1,8 +1,10 @@
-import { Play, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { Play, Plus, ListPlus } from 'lucide-react';
 import { Song } from '../../types/music';
 import { formatTime } from '../../utils/formatTime';
 import { usePlayerStore } from '../../store/playerStore';
 import { LikeButton } from '../library/LikeButton';
+import { AddToPlaylistModal } from '../playlist/AddToPlaylistModal';
 
 interface SongRowProps {
   song: Song;
@@ -11,6 +13,7 @@ interface SongRowProps {
 }
 
 export function SongRow({ song, index, contextList }: SongRowProps) {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const currentTrack = usePlayerStore(state => state.currentTrack);
   const isPlaying = usePlayerStore(state => state.isPlaying);
   const playTrack = usePlayerStore(state => state.playTrack);
@@ -81,6 +84,13 @@ export function SongRow({ song, index, contextList }: SongRowProps) {
         <LikeButton songId={song.id} />
         <span className={`text-sm w-10 text-right ${isActive ? 'text-primary' : ''}`}>{formatTime(song.duration)}</span>
         <button 
+          onClick={(e) => { e.stopPropagation(); setIsAddModalOpen(true); }}
+          className="hover:text-white transition-all opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-white/10 p-1.5 rounded-full" 
+          title="Add to playlist"
+        >
+          <ListPlus size={18} />
+        </button>
+        <button 
           onClick={handleAddToQueue}
           className="hover:text-white transition-all opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-white/10 p-1.5 rounded-full" 
           title="Add to queue"
@@ -88,6 +98,7 @@ export function SongRow({ song, index, contextList }: SongRowProps) {
           <Plus size={18} />
         </button>
       </div>
+      <AddToPlaylistModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} songId={song.id} />
     </div>
   );
 }

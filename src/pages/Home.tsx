@@ -69,11 +69,9 @@ export default function Home() {
       {recentSongs.length > 0 && (
         <section>
           <SectionHeader title="Continue Listening" />
-          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
             {recentSongs.map((song, idx) => (
-              <div key={song.id + '-' + idx} className="snap-start">
-                <SongCard song={song} contextList={recentSongs} />
-              </div>
+              <SongCard key={song.id + '-' + idx} song={song} contextList={recentSongs} variant="compact" />
             ))}
           </div>
         </section>
@@ -83,11 +81,9 @@ export default function Home() {
       {heavyRotation.length > 0 && (
         <section>
           <SectionHeader title="Your Heavy Rotation" />
-          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
             {heavyRotation.map((song) => (
-              <div key={song.id} className="snap-start">
-                <SongCard song={song} contextList={heavyRotation} />
-              </div>
+              <SongCard key={song.id} song={song} contextList={heavyRotation} variant="compact" />
             ))}
           </div>
         </section>
@@ -96,11 +92,9 @@ export default function Home() {
       {/* Made For You (Playlists) */}
       <section>
         <SectionHeader title="Made For You" />
-        <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
           {mockPlaylists.map((playlist) => (
-            <div key={playlist.id} className="snap-start">
-              <PlaylistCard playlist={playlist} />
-            </div>
+            <PlaylistCard key={playlist.id} playlist={playlist} variant="compact" />
           ))}
         </div>
       </section>
@@ -108,7 +102,7 @@ export default function Home() {
       {/* Trending Albums */}
       <section>
         <SectionHeader title="Trending Albums" />
-        <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
           {mockAlbums.map((album) => (
             <div key={album.id} className="snap-start">
               <AlbumCard album={album} />
@@ -120,7 +114,7 @@ export default function Home() {
       {/* Artists to Watch */}
       <section>
         <SectionHeader title="Artists to Watch" />
-        <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
           {mockArtists.map((artist) => (
             <div key={artist.id} className="snap-start">
               <ArtistCard artist={artist} />
@@ -133,7 +127,7 @@ export default function Home() {
       {recentSongs.length === 0 && (
         <section>
           <SectionHeader title="New Releases" />
-          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
             {mockSongs.map((song) => (
               <div key={song.id} className="snap-start">
                 <SongCard song={song} contextList={mockSongs} />

@@ -42,10 +42,13 @@ export interface Playlist {
   title: string;
   description?: string;
   coverUrl: string;
+  coverGradient?: string;
   songIds: string[];
   mood?: string;
   createdBy?: string;
   createdAt?: string;
+  updatedAt?: string;
+  isCustom?: boolean;
 }
 
 export interface Genre {

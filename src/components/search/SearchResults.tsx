@@ -45,7 +45,7 @@ export function SearchResults({ songs, albums, artists, playlists }: SearchResul
       {albums.length > 0 && (
         <section>
           <SectionHeader title="Albums" />
-          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
             {albums.map((album) => (
               <div key={album.id} className="snap-start">
                 <AlbumCard album={album} />
@@ -58,7 +58,7 @@ export function SearchResults({ songs, albums, artists, playlists }: SearchResul
       {artists.length > 0 && (
         <section>
           <SectionHeader title="Artists" />
-          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
             {artists.map((artist) => (
               <div key={artist.id} className="snap-start">
                 <ArtistCard artist={artist} />
@@ -71,7 +71,7 @@ export function SearchResults({ songs, albums, artists, playlists }: SearchResul
       {playlists.length > 0 && (
         <section>
           <SectionHeader title="Playlists" />
-          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
             {playlists.map((playlist) => (
               <div key={playlist.id} className="snap-start">
                 <PlaylistCard playlist={playlist} />
